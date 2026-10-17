@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: "1БКС24003"
+  config:
+    import: optional:file:.env[.properties] #чувствительные данные лежат в файле .env, в git его нет
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate #таблицы создаёт db/init.sql, приложение только проверяет, что модель с ними совпадает
+
+server:
+  error:
+    include-message: always #чтобы в ответе с ошибкой был текст, а не только код

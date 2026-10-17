@@ -1,0 +1,1297 @@
+{
+  "info": {
+    "name": "Парковка (лаба 3)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "Создать пользователя 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 201', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('user1Id', pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/users",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "users"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Олег Орлов\",\n  \"email\": \"oleg@example.com\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Создать пользователя 2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 201', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('user2Id', pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/users",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "users"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Мария Волк\",\n  \"email\": \"maria@example.com\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Все пользователи",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/users",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "users"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Пользователь по id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/users/{{user1Id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "users",
+            "{{user1Id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Изменить пользователя",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/users/{{user1Id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "users",
+            "{{user1Id}}"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Олег Орлов-Старший\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Создать зону на 1 место",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 201', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('zoneId', pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-zones",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-zones"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"capacity\": 1,\n  \"hourlyPrice\": 50\n}"
+        }
+      }
+    },
+    {
+      "name": "Все зоны",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-zones",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-zones"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Зона по id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-zones/{{zoneId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-zones",
+            "{{zoneId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Изменить цену зоны",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-zones/{{zoneId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-zones",
+            "{{zoneId}}"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"hourlyPrice\": 60\n}"
+        }
+      }
+    },
+    {
+      "name": "Создать автомобиль 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 201', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('vehicle1Id', pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/vehicles?ownerId={{user1Id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "vehicles"
+          ],
+          "query": [
+            {
+              "key": "ownerId",
+              "value": "{{user1Id}}"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"number\": \"T001TT\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Создать автомобиль 2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 201', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('vehicle2Id', pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/vehicles?ownerId={{user1Id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "vehicles"
+          ],
+          "query": [
+            {
+              "key": "ownerId",
+              "value": "{{user1Id}}"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"number\": \"T002TT\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Все автомобили",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/vehicles",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "vehicles"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Автомобиль по id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/vehicles/{{vehicle1Id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "vehicles",
+            "{{vehicle1Id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Изменить номер автомобиля",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/vehicles/{{vehicle1Id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "vehicles",
+            "{{vehicle1Id}}"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"number\": \"T003TT\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Въезд: автомобиль 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 201', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('session1Id', pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-sessions/entry?vehicleId={{vehicle1Id}}&zoneId={{zoneId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-sessions",
+            "entry"
+          ],
+          "query": [
+            {
+              "key": "vehicleId",
+              "value": "{{vehicle1Id}}"
+            },
+            {
+              "key": "zoneId",
+              "value": "{{zoneId}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Въезд: тот же автомобиль ещё раз (409)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 409', () => pm.response.to.have.status(409));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-sessions/entry?vehicleId={{vehicle1Id}}&zoneId={{zoneId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-sessions",
+            "entry"
+          ],
+          "query": [
+            {
+              "key": "vehicleId",
+              "value": "{{vehicle1Id}}"
+            },
+            {
+              "key": "zoneId",
+              "value": "{{zoneId}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Въезд: автомобиль 2, мест нет (409)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 409', () => pm.response.to.have.status(409));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-sessions/entry?vehicleId={{vehicle2Id}}&zoneId={{zoneId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-sessions",
+            "entry"
+          ],
+          "query": [
+            {
+              "key": "vehicleId",
+              "value": "{{vehicle2Id}}"
+            },
+            {
+              "key": "zoneId",
+              "value": "{{zoneId}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Все сессии",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-sessions",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-sessions"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Сессия по id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-sessions/{{session1Id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-sessions",
+            "{{session1Id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Выезд: автомобиль 1 (платно)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-sessions/{{session1Id}}/exit",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-sessions",
+            "{{session1Id}}",
+            "exit"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Выезд: ещё раз (409)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 409', () => pm.response.to.have.status(409));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-sessions/{{session1Id}}/exit",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-sessions",
+            "{{session1Id}}",
+            "exit"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Абонемент: оформить на 30 дней для автомобиля 2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 201', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('passId', pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-passes/purchase?vehicleId={{vehicle2Id}}&zoneId={{zoneId}}&days=30",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-passes",
+            "purchase"
+          ],
+          "query": [
+            {
+              "key": "vehicleId",
+              "value": "{{vehicle2Id}}"
+            },
+            {
+              "key": "zoneId",
+              "value": "{{zoneId}}"
+            },
+            {
+              "key": "days",
+              "value": "30"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Абонемент: оформить ещё один на ту же зону (409)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 409', () => pm.response.to.have.status(409));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-passes/purchase?vehicleId={{vehicle2Id}}&zoneId={{zoneId}}&days=30",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-passes",
+            "purchase"
+          ],
+          "query": [
+            {
+              "key": "vehicleId",
+              "value": "{{vehicle2Id}}"
+            },
+            {
+              "key": "zoneId",
+              "value": "{{zoneId}}"
+            },
+            {
+              "key": "days",
+              "value": "30"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Абонемент: продлить на 10 дней",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-passes/{{passId}}/extend?days=10",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-passes",
+            "{{passId}}",
+            "extend"
+          ],
+          "query": [
+            {
+              "key": "days",
+              "value": "10"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Все абонементы",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-passes",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-passes"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Абонемент по id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-passes/{{passId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-passes",
+            "{{passId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Въезд: автомобиль 2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 201', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('session2Id', pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-sessions/entry?vehicleId={{vehicle2Id}}&zoneId={{zoneId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-sessions",
+            "entry"
+          ],
+          "query": [
+            {
+              "key": "vehicleId",
+              "value": "{{vehicle2Id}}"
+            },
+            {
+              "key": "zoneId",
+              "value": "{{zoneId}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Передача: автомобиль 2 на парковке (409)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 409', () => pm.response.to.have.status(409));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/vehicles/{{vehicle2Id}}/transfer?newOwnerId={{user2Id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "vehicles",
+            "{{vehicle2Id}}",
+            "transfer"
+          ],
+          "query": [
+            {
+              "key": "newOwnerId",
+              "value": "{{user2Id}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Выезд: автомобиль 2 (бесплатно, amount = 0)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-sessions/{{session2Id}}/exit",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-sessions",
+            "{{session2Id}}",
+            "exit"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Передача: автомобиль 2 пользователю 2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/vehicles/{{vehicle2Id}}/transfer?newOwnerId={{user2Id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "vehicles",
+            "{{vehicle2Id}}",
+            "transfer"
+          ],
+          "query": [
+            {
+              "key": "newOwnerId",
+              "value": "{{user2Id}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Абонемент после передачи (CANCELLED)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 200', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-passes/{{passId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-passes",
+            "{{passId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Абонемент: продлить отменённый (409)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 409', () => pm.response.to.have.status(409));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-passes/{{passId}}/extend?days=10",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-passes",
+            "{{passId}}",
+            "extend"
+          ],
+          "query": [
+            {
+              "key": "days",
+              "value": "10"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Удалить сессию",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 204', () => pm.response.to.have.status(204));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-sessions/{{session1Id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-sessions",
+            "{{session1Id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Удалить абонемент",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 204', () => pm.response.to.have.status(204));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-passes/{{passId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-passes",
+            "{{passId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Удалить автомобиль 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 204', () => pm.response.to.have.status(204));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/vehicles/{{vehicle1Id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "vehicles",
+            "{{vehicle1Id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Удалить зону",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 204', () => pm.response.to.have.status(204));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/parking-zones/{{zoneId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "parking-zones",
+            "{{zoneId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Удалить пользователя 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 204', () => pm.response.to.have.status(204));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/users/{{user1Id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "users",
+            "{{user1Id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Удалить пользователя 2 (вместе с автомобилем 2)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Код ответа 204', () => pm.response.to.have.status(204));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/users/{{user2Id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "users",
+            "{{user2Id}}"
+          ]
+        }
+      }
+    }
+  ]
+}
